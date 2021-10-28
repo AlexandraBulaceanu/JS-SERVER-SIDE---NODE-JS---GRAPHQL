@@ -6,6 +6,8 @@ const port = 3001
 const MY_SECRET_KEY = "TOPSECRET"
 const bodyParser = require("body-parser")
 
+const {getAllUsers, getUserById, createUser, updateUser, deleteUser} = require("./users")
+
 app.use(bodyParser.json());
 
 const authMiddleware = (req, res, next) => {
@@ -58,6 +60,12 @@ app.post("/login", (req, res) => {
         });
     }
 })
+
+app.get("/users", getAllUsers );
+app.get("/users/:id", getUserById)
+app.post("/users", createUser);
+app.put("/users/:id", updateUser);
+app.delete("/users/:id", deleteUser)
 
 app.listen(port, () => {
     console.log("started on port")
